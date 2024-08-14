@@ -1,0 +1,16 @@
+---
+- hosts:  ubuntu
+  become:  yes
+  become_method:  sudo
+
+  tasks:
+   - name:  NTP daemon      
+     apt:     
+       name:  chrony
+       state:  present
+ 
+   - name:  NTP running
+     service:
+       name:  chronyd
+       state:  started
+       enabled:  yes        

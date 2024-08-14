@@ -1,0 +1,17 @@
+---
+- hosts: fedora
+  become: yes
+  become_method: sudo  
+
+  
+  tasks:
+     - name: ensure the chrony NTP daemon is installed
+       dnf:
+        name: chrony      
+        state: present
+
+     - name: Ensure that the chrony NTP daemon is running
+       service:
+        name: chronyd
+        state: started
+        enabled: yes

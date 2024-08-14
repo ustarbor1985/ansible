@@ -1,0 +1,33 @@
+---
+- name: Deploy Apache
+  hosts: fedora
+  become: yes
+  become_method: sudo
+  
+  tasks:
+    - name: Install Apache
+      dnf:
+       name:
+         - httpd
+         - httpd-devel 
+       state: present
+
+    - name: Copy local httpd.conf  
+      copy:
+         src:  "{{ item.src }}"
+         dest:  "{{item.dest }}"    
+         owner: root
+         group:  root
+         mode:  0644
+      with_items:            
+         - src: index.html
+           dest: /var/www/html/index.html
+
+    - name:  Ensure Apache is running
+      service: 
+         name:  httpd
+         state:  started
+         enabled:  yes
+
+
+

@@ -1,0 +1,13 @@
+---
+- name: create user playbooks
+  hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks: 
+  - name: add user 'Maria'
+    user:
+      name:  Maria
+      group: sys  
+    
+      

@@ -1,0 +1,17 @@
+---
+- name: Restart spooler and install software
+  hosts: windows
+  
+  vars_files:
+  - vars/windowssecrets.yml
+  
+  tasks:
+  - name: Install winfetch and 7-zip through Chocolatey
+    win_chocolatey:
+      state: present
+      name:
+      - winfetch
+      - 7zip
+
+  - name: Restart the print spooler service
+    win_shell: Restart-Service -Name spooler

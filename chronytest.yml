@@ -1,0 +1,20 @@
+---
+
+- hosts: ubuntu
+
+  become: yes
+
+  become_method: sudo
+
+  
+  tasks:
+
+   - name: install chrony
+  
+     dnf:  
+      
+       name: chrony
+
+       state: present
+
+
